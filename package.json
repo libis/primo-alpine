@@ -21,7 +21,7 @@
     "@angular/core": "^19.2.20",
     "@angular/platform-browser": "^19.2.20",
     "@angular/platform-browser-dynamic": "^19.2.20",
-    "@libis/primo-shared-state": "file:vendor/libis-primo-shared-state-2026.9.1.tgz",
+    "@libis/primo-shared-state": "file:vendor/libis-primo-shared-state-2026.11.1.tgz",
     "@ngrx/entity": "^19.2.1",
     "@ngrx/store": "^19.2.1",
     "@ngx-translate/core": "^15.0.0",
