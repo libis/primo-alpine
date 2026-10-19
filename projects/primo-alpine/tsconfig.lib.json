@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/primo-alpine",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "types": [],
+    "paths": {}
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "partial"
+  },
+  "exclude": ["**/*.spec.ts"]
+}

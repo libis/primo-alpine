@@ -1,0 +1,49 @@
+{
+  "name": "primo-alpine-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Workspace for @libis/primo-alpine (the library itself is in projects/primo-alpine).",
+  "scripts": {
+    "build": "ng build primo-alpine",
+    "test": "ng test primo-alpine --watch=false --browsers=ChromeHeadless",
+    "test:watch": "ng test primo-alpine",
+    "pack": "npm run build && npm pack ./dist/primo-alpine --pack-destination ./dist",
+    "publish:npm": "npm run build && npm publish ./dist/primo-alpine",
+    "e2e": "node scripts/e2e-vanilla.mjs"
+  },
+  "devDependencies": {
+    "@alpinejs/csp": "^3.17.3",
+    "@angular-devkit/build-angular": "^19.2.24",
+    "@angular/cli": "^19.2.24",
+    "@angular/common": "^19.2.20",
+    "@angular/compiler": "^19.2.20",
+    "@angular/compiler-cli": "^19.2.20",
+    "@angular/core": "^19.2.20",
+    "@angular/platform-browser": "^19.2.20",
+    "@angular/platform-browser-dynamic": "^19.2.20",
+    "@libis/primo-shared-state": "file:vendor/libis-primo-shared-state-2026.9.1.tgz",
+    "@ngrx/entity": "^19.2.1",
+    "@ngrx/store": "^19.2.1",
+    "@ngx-translate/core": "^15.0.0",
+    "@types/alpinejs": "^3.13.11",
+    "@types/jasmine": "~4.3.0",
+    "alpinejs": "3.17.3",
+    "jasmine-core": "~4.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^19.2.0",
+    "parse5": "^7.3.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.4.1",
+    "typescript": "~5.5.4",
+    "zone.js": "~0.15.1"
+  },
+  "e2e": {
+    "vanillaRepo": "https://github.com/ExLibrisGroup/customModule.git",
+    "vanillaBranch": "Angular-update"
+  }
+}

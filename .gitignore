@@ -1,0 +1,8 @@
+/node_modules
+/dist
+/.angular/cache
+/out-tsc
+/coverage
+.DS_Store
+*.tgz
+!/vendor/*.tgz

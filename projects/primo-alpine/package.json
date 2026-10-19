@@ -1,0 +1,51 @@
+{
+  "name": "@libis/primo-alpine",
+  "version": "19.0.0",
+  "description": "Build Primo NDE customizations as plain HTML plus Alpine.js islands, reading host state through @libis/primo-shared-state.",
+  "license": "MIT",
+  "author": "KULeuven/LIBIS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/libis/primo-alpine.git"
+  },
+  "keywords": [
+    "primo",
+    "nde",
+    "alpinejs",
+    "islands",
+    "module-federation",
+    "angular"
+  ],
+  "peerDependencies": {
+    "@angular/core": "~19.2.0",
+    "@libis/primo-shared-state": ">=2026.6.1",
+    "@ngx-translate/core": ">=15.0.0",
+    "alpinejs": "~3.17.3",
+    "rxjs": "^7.0.0"
+  },
+  "dependencies": {
+    "@alpinejs/csp": "~3.17.3",
+    "@types/alpinejs": "^3.13.11",
+    "parse5": "^7.3.0",
+    "reflect-metadata": "^0.2.2",
+    "tslib": "^2.4.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "bin": {
+    "primo-alpine": "cli/bin.js"
+  },
+  "exports": {
+    "./cli": {
+      "default": "./cli/index.js"
+    },
+    "./island.schema.json": {
+      "default": "./island.schema.json"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

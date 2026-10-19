@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  # Nightly: catches upstream changes in ExLibrisGroup/customModule and Primo NDE.
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      vanilla_branch:
+        description: 'ExLibrisGroup/customModule branch to test against (default: e2e.vanillaBranch in package.json)'
+        required: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: dist/*.tgz
+
+  e2e-vanilla:
+    # Installs the packed library into an untouched Ex Libris customModule with strict peer
+    # dependencies, runs `primo-alpine init`, generates islands, lints and builds.
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: dist
+      - run: node scripts/e2e-vanilla.mjs ${{ inputs.vanilla_branch && format('--branch {0}', inputs.vanilla_branch) || '' }}
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [test, e2e-vanilla]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: dist
+      - name: Tag matches package version
+        run: |
+          version=$(node -p "require('./projects/primo-alpine/package.json').version")
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME does not match version $version"; exit 1; }
+      - run: npm publish dist/libis-primo-alpine-*.tgz --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

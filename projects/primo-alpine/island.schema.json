@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NDE Alpine island",
+  "description": "Configuration of one Alpine island. Mirrors the @NDEComponent options.",
+  "type": "object",
+  "required": ["selector"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "selector": {
+      "type": "string",
+      "pattern": "^nde-[a-z0-9-]+$",
+      "description": "The NDE host slot to hook into, e.g. nde-search-bar or nde-brief-result."
+    },
+    "position": {
+      "enum": ["before", "after", "top", "bottom", "replace"],
+      "default": "after",
+      "description": "Where to render relative to the host component."
+    },
+    "priority": {
+      "type": "number",
+      "default": 100,
+      "description": "Ordering when several components target the same slot. Lower renders first."
+    },
+    "viewPattern": {
+      "type": "string",
+      "description": "Regular expression (without slashes) matched against the vid. Omit to render in every view."
+    },
+    "cspSafe": {
+      "type": "boolean",
+      "description": "Fail `primo-alpine lint` when an expression would break under a strict CSP. Defaults to true for central islands, false for view islands."
+    },
+    "description": { "type": "string" }
+  }
+}

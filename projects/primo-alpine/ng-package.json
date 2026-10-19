@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/primo-alpine",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  },
+  "allowedNonPeerDependencies": [
+    "@alpinejs/csp",
+    "@types/alpinejs",
+    "parse5",
+    "reflect-metadata"
+  ],
+  "assets": [
+    "cli/**",
+    "island.schema.json"
+  ]
+}
